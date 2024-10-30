@@ -1,7 +1,7 @@
-.header {
-    display: flex;
-    justify-content: space-between;
-    padding: 24px;
-    background-color: inherit;
-    border-bottom: 1px solid black;
+.headerNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  background-color: #000000;
 }

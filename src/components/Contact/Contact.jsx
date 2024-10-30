@@ -1,29 +1,39 @@
-import styles from './Contact.module.css';
-import { ImUsers } from 'react-icons/im';
-import { FaPhoneAlt } from 'react-icons/fa';
+import { FaUser } from "react-icons/fa";
+import { FaPhoneAlt } from "react-icons/fa";
+import { useDispatch } from "react-redux";
 
-const Contact = ({ id, name, number, onDeleteContact }) => {
+import { deleteContact } from "../../redux/contacts/operations";
+
+import css from "./Contact.module.css";
+import toast from "react-hot-toast";
+
+function Contact({ id, name, number }) {
+  const dispatch = useDispatch();
+  const onDeleteContact = (id) => {
+    dispatch(deleteContact(id));
+    toast.success("Your contact deleted sucsessfuly", { duration: 1500 });
+  };
+
   return (
-    <div className={styles.contact}>
-      <div className={styles.info}>
-        <p className={styles.name}>
-          <ImUsers className={styles.icon} />
-          {name}
-        </p>
-        <p className={styles.number}>
-          <FaPhoneAlt className={styles.icon} />
-          {number}
-        </p>
+    <li className={css.contactWrapper}>
+      <div className={css.wrapper}>
+        <FaUser />
+        <h3>{name}</h3>
       </div>
+      <div className={css.wrapper}>
+        <FaPhoneAlt />
+        <p>{number}</p>
+      </div>
+
       <button
-        onClick={() => onDeleteContact(id)}
+        className={css.deleteBtn}
         type="button"
-        className={styles.deleteBtn}
+        onClick={() => onDeleteContact(id)}
       >
         Delete
       </button>
-    </div>
+    </li>
   );
-};
+}
 
 export default Contact;

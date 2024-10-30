@@ -1,6 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-
-import { apiRefreshUser, login, logout, register } from './operations';
+import { createSlice } from "@reduxjs/toolkit";
+import { apiLogin, apiRegister, apiRefreshUser, apiLogout } from "./operations";
 
 const INITIAL_STATE = {
   user: {
@@ -12,35 +11,37 @@ const INITIAL_STATE = {
   isRefreshing: false,
   error: null,
 };
+
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState: INITIAL_STATE,
-  reducers: {},
-  extraReducers: builder =>
+  extraReducers: (builder) =>
     builder
-      .addCase(register.pending, state => {
+      .addCase(apiRegister.pending, (state) => {
         state.error = null;
       })
-      .addCase(register.fulfilled, (state, action) => {
+      .addCase(apiRegister.fulfilled, (state, action) => {
         state.isLoggedIn = true;
         state.token = action.payload.token;
         state.user = action.payload.user;
       })
-      .addCase(register.rejected, (state, action) => {
-        state.error = action.payload;
+      .addCase(apiRegister.rejected, (state) => {
+        state.error = true;
       })
-      .addCase(login.pending, state => {
+
+      .addCase(apiLogin.pending, (state) => {
         state.error = null;
       })
-      .addCase(login.fulfilled, (state, action) => {
+      .addCase(apiLogin.fulfilled, (state, action) => {
         state.isLoggedIn = true;
         state.token = action.payload.token;
         state.user = action.payload.user;
       })
-      .addCase(login.rejected, (state, action) => {
-        state.error = action.payload;
+      .addCase(apiLogin.rejected, (state) => {
+        state.error = true;
       })
-      .addCase(apiRefreshUser.pending, state => {
+
+      .addCase(apiRefreshUser.pending, (state) => {
         state.error = null;
         state.isRefreshing = true;
       })
@@ -49,19 +50,20 @@ const authSlice = createSlice({
         state.user = action.payload;
         state.isRefreshing = false;
       })
-      .addCase(apiRefreshUser.rejected, state => {
+      .addCase(apiRefreshUser.rejected, (state) => {
         state.error = true;
         state.isRefreshing = false;
       })
-      .addCase(logout.pending, state => {
+
+      .addCase(apiLogout.pending, (state) => {
         state.error = null;
       })
-      .addCase(logout.fulfilled, () => {
+      .addCase(apiLogout.fulfilled, () => {
         return INITIAL_STATE;
       })
-      .addCase(logout.rejected, (state, action) => {
-        state.error = action.payload;
-        state.isRefreshing = false;
+      .addCase(apiLogout.rejected, (state) => {
+        state.error = true;
       }),
 });
+
 export const authReducer = authSlice.reducer;

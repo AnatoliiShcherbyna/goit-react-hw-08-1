@@ -1,29 +1,40 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { selectAuthUser } from '../../redux/auth/selectors';
-import { logout } from '../../redux/auth/operations';
-import styles from './UserMenu.module.css';
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+
+import { selectAuthUser } from "../../redux/auth/selectors";
+import { apiLogout } from "../../redux/auth/operations";
+
+import css from "./UserMenu.module.css";
+import ModalWindow from "../ModalWindow/ModalWindow";
 
 const UserMenu = () => {
-  const dispatch = useDispatch();
+  const [modalIsOpen, setIsOpen] = useState(false);
   const user = useSelector(selectAuthUser);
 
-  const handleLogout = () => {
-    dispatch(logout());
-  };
-
-  if (!user) {
-    return <p>Loading user data...</p>;
+  function openModal() {
+    setIsOpen(true);
   }
 
   return (
-    <div className={styles.wrapper}>
+    <div className={css.wrapper}>
       <div>
         <h3>{user.name}</h3>
         <p>{user.email}</p>
       </div>
-      <button type="button" onClick={handleLogout}>
+
+      <button
+        type="button"
+        onClick={() => {
+          //dispatch(apiLogout());
+          openModal();
+        }}
+      >
         Log Out
       </button>
+      <ModalWindow
+        modalIsOpen={modalIsOpen}
+        setIsOpen={setIsOpen}
+      ></ModalWindow>
     </div>
   );
 };

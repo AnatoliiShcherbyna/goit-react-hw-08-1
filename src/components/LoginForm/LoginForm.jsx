@@ -1,85 +1,75 @@
-import { ErrorMessage, Field, Form, Formik } from 'formik';
-import * as Yup from 'yup';
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useDispatch, useSelector } from "react-redux";
+import * as Yup from "yup";
 
-import styles from './LoginForm.module.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../../redux/auth/operations';
-import { selectAuthError } from '../../redux/auth/selectors';
+import Error from "../Error/Error";
 
-const LoginValidationSchema = Yup.object().shape({
+import { apiLogin } from "../../redux/auth/operations";
+import { selectAuthError } from "../../redux/auth/selectors";
+
+import css from "./LoginForm.module.css";
+
+const validationParams = Yup.object().shape({
   password: Yup.string()
-    .required("Пароль є обов'язковим")
-    .min(8, 'Пароль має бути мінімум в 8 символів')
-    .max(100, 'Пароль має бути меншим за 100 символів'),
-
-  email: Yup.string()
-    .email('Некоректна електронна адреса')
-    .required("Електронна адреса є обов'язковим"),
+    .min(8, "Too Short!")
+    .max(50, "Too Long!")
+    .required("Required"),
+  email: Yup.string().email("Enter a valid email!").required("Required"),
 });
 
-const LoginForm = () => {
+function LoginForm() {
   const dispatch = useDispatch();
   const error = useSelector(selectAuthError);
-  const INITIAL_VALUES = {
-    email: '',
-    password: '',
+
+  const initialValues = {
+    email: "",
+    password: "",
   };
 
-  const handleSubmit = values => {
-    dispatch(login(values));
+  const handleSubmit = (values, actions) => {
+    dispatch(apiLogin(values));
+    actions.resetForm();
   };
+
   return (
     <Formik
-      initialValues={INITIAL_VALUES}
+      initialValues={initialValues}
       onSubmit={handleSubmit}
-      validationSchema={LoginValidationSchema}
+      validationSchema={validationParams}
     >
-      {({ errors }) => (
-        <Form className={styles.form}>
-          <label className={styles.label}>
-            <span>Email:</span>
-            <Field
-              type="text"
-              name="email"
-              placeholder="top_inblu@ukr.net"
-            />
-            <ErrorMessage
-              className={styles.errorText}
-              name="email"
-              component="span"
-            />
-          </label>
+      <Form className={css.formWrapper}>
+        <label className={css.wrapper}>
+          <span className={css.label}>Email</span>
+          <Field
+            className={css.input}
+            type="text"
+            name="email"
+            placeholder="across@mail.com"
+          />
+          <ErrorMessage className={css.message} name="email" component="span" />
+        </label>
+        <label className={css.wrapper}>
+          <span className={css.label}>Password</span>
+          <Field
+            className={css.input}
+            type="password"
+            name="password"
+            placeholder="examplepwd12345"
+          />
+          <ErrorMessage
+            className={css.message}
+            name="password"
+            component="span"
+          />
+        </label>
 
-          <label className={styles.label}>
-            <span>Password</span>
-            <Field
-              type="password"
-              name="password"
-              placeholder="Enter your password"
-            />
-            <ErrorMessage
-              className={styles.errorText}
-              name="password"
-              component="span"
-            />
-          </label>
-
-          <button
-            disabled={Object.keys(errors).length > 0}
-            className={styles.submitBtn}
-            type="submit"
-          >
-            Log In
-          </button>
-          {error && (
-            <p className={styles.errorText}>
-              Oops, some error occured... {error}
-            </p>
-          )}
-        </Form>
-      )}
+        <button className={css.logInBtn} type="submit">
+          Log In
+        </button>
+        {error && <Error />}
+      </Form>
     </Formik>
   );
-};
+}
 
 export default LoginForm;

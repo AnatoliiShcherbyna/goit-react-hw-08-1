@@ -1,53 +1,37 @@
-.form {
-    border: 2px solid rgb(0, 0, 0);
-    border-radius: 8px;
-    padding: 20px;
-    max-width: 400px;
-    margin: 20px auto;
-
+.container {
+  padding: 24px;
 }
 
+.formWrapper {
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 36px;
+  max-width: 400px;
+  margin-bottom: 24px;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 24px;
+}
 .label {
-    display: block;
-    margin-bottom: 15px;
-
+  font-size: 18px;
+  font-weight: 500;
 }
-
-.label span {
-    align-items: flex-start;
-    display: flex;
-    margin-bottom: 5px;
-    font-weight: bold;
-
+.input {
+  padding: 12px;
+  font-size: 18px;
+  border: 1px solid gray;
+  border-radius: 8px;
+  outline: none;
 }
-
-input {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+.message {
+  font-size: 18px;
+  color: red;
+  background-color: #ffd1d1;
 }
-
-.submitBtn {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin-top: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #f0f0f0;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    color: black;
-
-}
-
-.submitBtn:hover {
-    background-color: #e0e0e0;
-}
-
-.errorText {
-    color: red;
-    font-size: 0.8rem;
+.addContactBtn {
+  display: block;
+  margin: 0 auto;
 }

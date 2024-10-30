@@ -1,8 +1,6 @@
-.contactList {
-    list-style: none;
-    padding: 0;
-}
-
-.contactItem {
-    margin-bottom: 10px;
+.listWrapper {
+  padding: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
 }
