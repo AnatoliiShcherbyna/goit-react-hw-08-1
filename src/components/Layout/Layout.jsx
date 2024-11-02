@@ -1,11 +1,17 @@
-import AppBar from '../AppBar/AppBar';
+// Layout.jsx
+
+import { Suspense } from "react";
+import CustomAppBar from "../AppBar/AppBar"; // Імпорт CustomAppBar
 
 const Layout = ({ children }) => {
   return (
-    <>
-      <AppBar />
-      <main>{children}</main>
-    </>
+    <div>
+      <CustomAppBar /> {/* Використання нового компоненту CustomAppBar */}
+      <main>
+        <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+        {/* Відображення children з індикатором завантаження */}
+      </main>
+    </div>
   );
 };
 

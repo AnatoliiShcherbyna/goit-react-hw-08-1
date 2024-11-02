@@ -1,13 +1,20 @@
-import RegistrationForm from '../../components/RegistrationForm/RegistrationForm';
-import styles from './RegistrationPage.module.css';
+// RegistrationPage.jsx
 
-const RegistrationPage = () => {
-  return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>Register</h1>
-      <RegistrationForm />
-    </div>
-  );
-};
+import React from "react";
+import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
+import css from "./RegistrationPage.module.css";
+
+const RegistrationPage = () => (
+  <div className={css.wrap}>
+    <h1 className={css.title}>Register</h1>
+    <p className={css.text}>
+      Join to keep your essential contacts in one app and secure place. Just
+      complete the form and start your journey!
+    </p>
+    <br />
+    <RegistrationForm />
+    <br />
+  </div>
+);
 
 export default RegistrationPage;

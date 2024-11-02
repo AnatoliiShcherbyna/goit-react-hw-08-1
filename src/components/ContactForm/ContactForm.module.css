@@ -1,37 +1,45 @@
-.container {
-  padding: 24px;
-}
+/* ContactForm.module.css */
 
-.formWrapper {
-  border: 1px solid black;
-  border-radius: 8px;
-  padding: 36px;
-  max-width: 400px;
-  margin-bottom: 24px;
-}
-.wrapper {
+.contactForm {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  margin-bottom: 24px;
+  gap: 15px;
+  margin-bottom: 20px;
 }
-.label {
-  font-size: 18px;
-  font-weight: 500;
-}
+
 .input {
   padding: 12px;
-  font-size: 18px;
-  border: 1px solid gray;
-  border-radius: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s ease;
+}
+
+.input:focus {
+  border-color: #3e3e4a;
   outline: none;
 }
-.message {
-  font-size: 18px;
-  color: red;
-  background-color: #ffd1d1;
+
+.button {
+  background-color: #5d5d70;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
 }
-.addContactBtn {
+
+.button:hover {
+  background-color: #333;
+}
+
+.contactNameLabel,
+.contactPhoneLabel {
+  font-size: 20px;
+  font-weight: 500;
   display: block;
-  margin: 0 auto;
+  text-align: left;
 }

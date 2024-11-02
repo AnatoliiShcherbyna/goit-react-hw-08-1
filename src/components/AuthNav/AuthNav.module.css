@@ -1,12 +1,7 @@
-.link {
-  font-size: 18px;
-}
+/* AuthNav.module.css */
 
-.navigation {
+.authNav {
   display: flex;
-  gap: 24px;
-}
-
-.active {
-  color: rgb(255, 74, 102);
+  gap: 20px;
+  padding: 10px;
 }

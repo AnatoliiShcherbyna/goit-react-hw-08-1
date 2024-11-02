@@ -1,7 +1,19 @@
-.headerNav {
+/* AppBar.module.css */
+
+.appBar {
+  border-bottom: 1px solid #dee2e6;
+  padding: 10px 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 24px;
-  background-color: #000000;
+  gap: 20px;
+  max-width: 1280px;
+  margin: 0 auto;
 }

@@ -1,12 +1,15 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchContacts } from '../../redux/contacts/operations';
-import { selectLoading, selectError } from '../../redux/contacts/selectors';
-import ContactList from '../../components/ContactList/ContactList';
-import ContactForm from '../../components/ContactForm/ContactForm';
-import SearchBox from '../../components/SearchBox/SearchBox';
-import { useEffect } from 'react';
+// ContactsPage.jsx
 
-function ContactsPage() {
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import ContactList from "../../components/ContactList/ContactList";
+import ContactForm from "../../components/ContactForm/ContactForm";
+import SearchBox from "../../components/SearchBox/SearchBox";
+import { fetchContacts } from "../../redux/contacts/operations";
+import { selectLoading, selectError } from "../../redux/contacts/selectors";
+import styles from "./ContactsPage.module.css";
+
+const ContactsPage = () => {
   const dispatch = useDispatch();
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
@@ -16,15 +19,20 @@ function ContactsPage() {
   }, [dispatch]);
 
   return (
-    <div>
-      <h1>Contacts</h1>
+    <div className={styles.contactsPageContainer}>
+      <br />
+      <h1 className={styles.contactsTitle}>Phonebook</h1>
+      <p className={styles.contactsText}>
+        Welcome to our app! Here you can manage your contacts - add or delete
+        them, and always have access to your important information!
+      </p>
       <ContactForm />
-      {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
       <SearchBox />
+      {loading && <p>Loading contacts...</p>}
+      {error && <p>Error: {error}</p>}
       <ContactList />
     </div>
   );
-}
+};
 
 export default ContactsPage;

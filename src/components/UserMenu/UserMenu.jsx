@@ -1,40 +1,36 @@
+// UserMenu.jsx
+
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
-
-import { selectAuthUser } from "../../redux/auth/selectors";
-import { apiLogout } from "../../redux/auth/operations";
-
-import css from "./UserMenu.module.css";
-import ModalWindow from "../ModalWindow/ModalWindow";
+import { logOut, refreshUser } from "../../redux/auth/operations";
+import styles from "./UserMenu.module.css";
 
 const UserMenu = () => {
-  const [modalIsOpen, setIsOpen] = useState(false);
-  const user = useSelector(selectAuthUser);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
-  function openModal() {
-    setIsOpen(true);
-  }
+  const handleLogout = () => {
+    dispatch(logOut()); // Змінено logout на logOut
+  };
 
   return (
-    <div className={css.wrapper}>
-      <div>
-        <h3>{user.name}</h3>
-        <p>{user.email}</p>
-      </div>
-
-      <button
-        type="button"
-        onClick={() => {
-          //dispatch(apiLogout());
-          openModal();
-        }}
-      >
-        Log Out
-      </button>
-      <ModalWindow
-        modalIsOpen={modalIsOpen}
-        setIsOpen={setIsOpen}
-      ></ModalWindow>
+    <div className={styles.userMenuContainer}>
+      {isLoggedIn ? (
+        <div className={styles.userInfo}>
+          <p>Welcome, {user.name}! </p>
+          <p>Email: {user.email}</p>
+        </div>
+      ) : (
+        <p className={styles.infoText}>
+          Please log in to see your information.
+        </p>
+      )}
+      {isLoggedIn && (
+        <button onClick={handleLogout} className={styles.logoutButton}>
+          Logout
+        </button>
+      )}
     </div>
   );
 };

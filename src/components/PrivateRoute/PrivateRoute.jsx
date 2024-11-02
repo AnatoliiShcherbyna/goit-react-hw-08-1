@@ -1,10 +1,14 @@
-import { useSelector } from "react-redux";
-import { selectAuthIsLoggedIn } from "../../redux/auth/selectors";
-import { Navigate } from "react-router-dom";
+// PrivateRoute.jsx
 
-const PrivateRoute = ({ component, redirectTo = "/" }) => {
-  const isLoggedIn = useSelector(selectAuthIsLoggedIn);
-  return isLoggedIn ? component : <Navigate to={redirectTo} replace />;
+import { Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectIsLoggedIn } from "../../redux/auth/selectors";
+
+const PrivateRoute = ({ component: Component, redirectTo = "/" }) => {
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+
+  // Якщо користувач авторизований, показуємо компонент, інакше переходимо на redirectTo
+  return isLoggedIn ? Component : <Navigate to={redirectTo} />;
 };
 
 export default PrivateRoute;

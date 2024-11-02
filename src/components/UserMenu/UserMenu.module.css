@@ -1,6 +1,39 @@
-.wrapper {
+/* UserMenu.module.css */
+
+.userMenuContainer {
   display: flex;
-  gap: 16px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.userInfo {
+  text-align: left;
+  margin-right: 40px;
+  font-size: 16px;
+}
+
+.userInfo p {
+  margin: 0;
+  line-height: 1.2;
+}
+
+.infoText {
+  text-align: center;
+}
+
+.logoutButton {
+  background-color: #5d5d70;
   color: white;
-  text-align: right;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-left: auto;
+  transition: background-color 0.3s ease;
+}
+
+.logoutButton:hover {
+  background-color: #333;
 }

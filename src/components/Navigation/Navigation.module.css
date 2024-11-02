@@ -1,12 +1,7 @@
-.link {
-  font-size: 18px;
-}
+/* Navigation.module.css */
 
-.navigation {
+nav {
   display: flex;
-  gap: 24px;
-}
-
-.active {
-  color: #249cff;
+  gap: 20px;
+  padding: 10px;
 }
