@@ -1,9 +1,9 @@
-// contacts/operations.js
+
 
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// Отримання всіх контактів
+
 export const fetchContacts = createAsyncThunk(
   "contacts/fetchAll",
   async (_, thunkAPI) => {
@@ -30,7 +30,7 @@ export const fetchContacts = createAsyncThunk(
   },
 );
 
-// Додавання нового контакту
+
 export const addContact = createAsyncThunk(
   "contacts/addContact",
   async (contact, thunkAPI) => {
@@ -58,7 +58,7 @@ export const addContact = createAsyncThunk(
   },
 );
 
-// Видалення контакту за ID
+
 export const deleteContact = createAsyncThunk(
   "contacts/deleteContact",
   async (contactId, thunkAPI) => {
@@ -86,7 +86,7 @@ export const deleteContact = createAsyncThunk(
   },
 );
 
-// Оновлення контакту за ID
+
 export const updateContact = createAsyncThunk(
   "contacts/updateContact",
   async ({ contactId, contactData }, thunkAPI) => {

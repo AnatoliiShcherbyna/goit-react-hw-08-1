@@ -7,7 +7,7 @@ import {
   deleteContact,
   updateContact,
 } from "./operations";
-import { logOut } from "../auth/operations"; // Імпорт дії logOut
+import { logOut } from "../auth/operations"; 
 
 const contactsSlice = createSlice({
   name: "contacts",
@@ -74,11 +74,11 @@ const contactsSlice = createSlice({
         state.error = action.error.message;
         state.loading = false;
       })
-      // Додаємо обробку logOut.fulfilled для очищення стану контактів
+      
       .addCase(logOut.fulfilled, (state) => {
-        state.items = []; // Очищення списку контактів
-        state.loading = false; // Скидання стану завантаження
-        state.error = null; // Скидання помилки
+        state.items = []; 
+        state.loading = false; 
+        state.error = null; 
       });
   },
 });
