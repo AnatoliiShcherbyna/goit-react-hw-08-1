@@ -1,38 +1,18 @@
-// UserMenu.jsx
-
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { logOut, refreshUser } from "../../redux/auth/operations";
-import styles from "./UserMenu.module.css";
+import { useDispatch, useSelector } from 'react-redux'
+import { logout } from '../../redux/auth/operations';
+import { selectUser } from '../../redux/auth/selectors';
+import css from "./UserMenu.module.css"
 
 const UserMenu = () => {
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.user);
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-
-  const handleLogout = () => {
-    dispatch(logOut()); // Змінено logout на logOut
-  };
+    const dispatch = useDispatch();
+    const user = useSelector(selectUser);
 
   return (
-    <div className={styles.userMenuContainer}>
-      {isLoggedIn ? (
-        <div className={styles.userInfo}>
-          <p>Welcome, {user.name}! </p>
-          <p>Email: {user.email}</p>
-        </div>
-      ) : (
-        <p className={styles.infoText}>
-          Please log in to see your information.
-        </p>
-      )}
-      {isLoggedIn && (
-        <button onClick={handleLogout} className={styles.logoutButton}>
-          Logout
-        </button>
-      )}
-    </div>
-  );
-};
+      <div className={css.divForUsermenu}>
+        <h3 className={css.navTitle} >Welcome, {user.name}</h3>
+          <button className={css.btnLogout} onClick={() => dispatch(logout())}>Logout</button>    
+      </div>     
+  )
+}
 
-export default UserMenu;
+export default UserMenu

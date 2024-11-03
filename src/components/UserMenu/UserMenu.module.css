@@ -1,39 +1,32 @@
-/* UserMenu.module.css */
-
-.userMenuContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
+.divForUsermenu {
+    display: flex;
+        justify-content: space-between;
+            align-items: baseline;
+    background-color: rgb(81, 101, 68);
+        min-width: 500px;
+        min-height: 50px;
+        border-radius: 4px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 }
 
-.userInfo {
-  text-align: left;
-  margin-right: 40px;
-  font-size: 16px;
+.divNav {
+    display: flex;
+    gap: 15px;
 }
 
-.userInfo p {
-  margin: 0;
-  line-height: 1.2;
+.navTitle {
+    color: azure;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 1.2;
+        letter-spacing: 0.02em;
+        text-decoration: none;
+        margin-left: 70px;
 }
 
-.infoText {
-  text-align: center;
-}
-
-.logoutButton {
-  background-color: #5d5d70;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-left: auto;
-  transition: background-color 0.3s ease;
-}
-
-.logoutButton:hover {
-  background-color: #333;
+.btnLogout {
+    margin-right: 15px;
+    margin-bottom: 10px;
 }

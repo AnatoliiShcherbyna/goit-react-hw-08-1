@@ -1,38 +1,29 @@
-.formWrapper {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: 1px solid black;
-  border-radius: 8px;
-  padding: 36px;
-  width: 500px;
-  margin-bottom: 24px;
-  background-color: #ffffff;
+label {
+    display: block;
+    margin-bottom: 10px;
 }
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin-bottom: 24px;
+
+span {
+    font-weight: bold;
 }
-.label {
-  font-size: 18px;
-  font-weight: 500;
+
+.inputRegistarion {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
 }
-.input {
-  padding: 12px;
-  font-size: 18px;
-  border: 1px solid gray;
-  border-radius: 8px;
-  outline: none;
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 4px;
 }
-.message {
-  font-size: 18px;
-  color: red;
-  background-color: #ffd1d1;
-}
-.SignUpBtn {
-  display: block;
-  width: 100%;
+
+button:hover,
+button:focus {
+    background-color: blue;
 }

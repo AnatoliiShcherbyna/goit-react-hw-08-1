@@ -1,56 +1,56 @@
-// ContactForm.jsx
+import React from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import css from './ContactForm.module.css';
+import { useDispatch } from 'react-redux';
+import { addContact } from '../../redux/contacts/operations';
 
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addContact } from "../../redux/contacts/operations";
-import styles from "./ContactForm.module.css";
+const ProfileValidationSchema = Yup.object().shape({
+  username: Yup.string()
+    .required('Name is required')
+    .min(3, 'Name must be at least 3 characters')
+    .max(50, "Name can't exceed 50 characters"),
+  tel: Yup.string()
+    .required('Number is required')
+    .min(3, 'Number must be at least 3 characters')
+    .max(50, "Number can't exceed 50 characters"),
+});
 
 const ContactForm = () => {
-  const [name, setName] = useState("");
-  const [number, setNumber] = useState("");
+  const initialValues = { username: '', tel: '' };
   const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(addContact({ name, number }));
-    setName("");
-    setNumber("");
+  const onSubmit = (values, options) => {
+    const newContact = {name: values.username, number: values.tel };
+    dispatch(addContact(newContact));
+    options.resetForm();
   };
 
+
   return (
-    <form onSubmit={handleSubmit} className={styles.contactForm}>
-      <label htmlFor="contact-name" className={styles.contactNameLabel}>
-        Contact name
-      </label>
-      <input
-        type="text"
-        id="contact-name"
-        name="contactName"
-        placeholder="Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        required
-        autoComplete="name"
-        className={styles.input}
-      />
-      <label htmlFor="contact-number" className={styles.contactPhoneLabel}>
-        Contact phone
-      </label>
-      <input
-        type="tel"
-        id="contact-number"
-        name="contactNumber"
-        placeholder="Phone number"
-        value={number}
-        onChange={(e) => setNumber(e.target.value)}
-        required
-        autoComplete="tel"
-        className={styles.input}
-      />
-      <button type="submit" className={styles.button}>
-        Add Contact
-      </button>
-    </form>
+    <div>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={ProfileValidationSchema}
+      >
+        <Form className={css.tagForm}>
+          <label className={css.capitalForm1}>
+            <span>Name</span>
+            <Field type="text" name="username" />
+          </label>
+          <ErrorMessage name="username" component="div" className={css.error} />
+          <label className={css.capitalForm2}>
+            <span>Number</span>
+            <Field type="tel" name="tel" />
+          </label>
+          <ErrorMessage name="tel" component="div" className={css.error} />
+          <button type="submit" className={css.btnAdd} >
+            Add contact
+          </button>
+        </Form>
+      </Formik>
+    </div>
   );
 };
 

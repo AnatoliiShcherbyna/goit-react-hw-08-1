@@ -1,28 +1,35 @@
-// Contact.jsx
+import React from 'react';
+import { FaUser } from "react-icons/fa6";
+import { FaPhoneAlt } from "react-icons/fa";
+import css from "./Contact.module.css"
+import { useDispatch } from 'react-redux';
+import { deleteContact } from '../../redux/contacts/operations';
 
-import React from "react";
-import { FaUser, FaPhone } from "react-icons/fa";
-import styles from "./Contact.module.css";
 
-const Contact = ({ contact, deleteContact }) => {
-  return (
-    <div className={styles.contactCard}>
-      <div className={styles.contactInfo}>
-        <div className={styles.contactRow}>
-          <FaUser /> {contact.name}
+function Contact({ name, number, id }) {
+
+    const dispatch = useDispatch();
+    
+    return (
+        <li>
+            <div className={css.divPerson}>
+<div>
+            <div className={css.boxUsername}>
+                <FaUser size="20" />
+                <p>{name}</p>
+            </div>
+            <div className={css.boxPhone}>
+                <FaPhoneAlt size="20" />  
+                <p>{number}</p>    
+            </div>
+</div>
+                <button type="button" onClick={() => dispatch(deleteContact(id))}>
+                Delete
+                </button>    
         </div>
-        <div className={styles.contactRow}>
-          <FaPhone /> {contact.number}
-        </div>
-      </div>
-      <button
-        className={styles.deleteButton}
-        onClick={() => deleteContact(contact.id)}
-      >
-        Delete
-      </button>
-    </div>
-  );
-};
+        </li>
+    )
+}
+
 
 export default Contact;

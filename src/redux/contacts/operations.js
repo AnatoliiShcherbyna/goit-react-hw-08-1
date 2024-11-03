@@ -1,116 +1,29 @@
-
-
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { generalApi } from "../auth/operations";
 
-
-export const fetchContacts = createAsyncThunk(
-  "contacts/fetchAll",
-  async (_, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const persistedToken = state.auth.token;
-
-    if (!persistedToken) {
-      return thunkAPI.rejectWithValue("No token found");
-    }
-
+export const fetchContacts = createAsyncThunk('fetchData', async (_, thunkApi) => {
     try {
-      const response = await axios.get(
-        "https://connections-api.goit.global/contacts",
-        {
-          headers: {
-            Authorization: `Bearer ${persistedToken}`,
-          },
-        },
-      );
-      return response.data;
+        const { data } = await generalApi.get('/contacts');
+        return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+        return thunkApi.rejectWithValue(error.messsage);
     }
-  },
-);
+});
 
-
-export const addContact = createAsyncThunk(
-  "contacts/addContact",
-  async (contact, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const persistedToken = state.auth.token;
-
-    if (!persistedToken) {
-      return thunkAPI.rejectWithValue("No token found");
-    }
-
+export const deleteContact = createAsyncThunk('deleteContactThunk', async (id, thunkApi) => {
     try {
-      const response = await axios.post(
-        "https://connections-api.goit.global/contacts",
-        contact,
-        {
-          headers: {
-            Authorization: `Bearer ${persistedToken}`,
-          },
-        },
-      );
-      return response.data;
+        const { data } = await generalApi.delete(`/contacts/${id}`);
+        return data.id;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+        return thunkApi.rejectWithValue(error.messsage);
     }
-  },
-);
+});
 
-
-export const deleteContact = createAsyncThunk(
-  "contacts/deleteContact",
-  async (contactId, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const persistedToken = state.auth.token;
-
-    if (!persistedToken) {
-      return thunkAPI.rejectWithValue("No token found");
-    }
-
+export const addContact = createAsyncThunk('addContactThunk', async (body, thunkApi) => {
     try {
-      await axios.delete(
-        `https://connections-api.goit.global/contacts/${contactId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${persistedToken}`,
-          },
-        },
-      );
-      return contactId;
+        const { data } = await generalApi.post(`/contacts/`, body);
+        return data;
     } catch (error) {
-      console.error("Error deleting contact:", error.response.data);
-      return thunkAPI.rejectWithValue(error.message);
+        return thunkApi.rejectWithValue(error.messsage);
     }
-  },
-);
-
-
-export const updateContact = createAsyncThunk(
-  "contacts/updateContact",
-  async ({ contactId, contactData }, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const persistedToken = state.auth.token;
-
-    if (!persistedToken) {
-      return thunkAPI.rejectWithValue("No token found");
-    }
-
-    try {
-      const response = await axios.patch(
-        `https://connections-api.goit.global/contacts/${contactId}`,
-        contactData,
-        {
-          headers: {
-            Authorization: `Bearer ${persistedToken}`,
-          },
-        },
-      );
-      return response.data;
-    } catch (error) {
-      console.error("Error updating contact:", error.response.data);
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  },
-);
+});
